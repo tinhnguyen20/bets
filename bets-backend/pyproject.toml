@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bets-backend"
+version = "0.1.0"
+description = ""
+authors = ["Tinh Nguyen (tinhngu) <tinhngu@cisco.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0"
+djangorestframework = "^3.14.0"
+authlib = ">=1.0,<2.0"
+python-dotenv = ">=0.19,<1.0"
+requests = ">=2.27,<3.0"
+drf-jwt = "^1.19.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
