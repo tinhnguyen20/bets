@@ -18,6 +18,7 @@ python-dotenv = ">=0.19,<1.0"
 requests = ">=2.27,<3.0"
 drf-jwt = "^1.19.2"
 djangorestframework-simplejwt = "^5.3.1"
+cryptography = "42.0.0"
 
 
 [build-system]
