@@ -75,6 +75,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"username": "<YOUR-USERNAM
 10. **Deployment**
     - [ ] Choose a deployment platform (e.g., Heroku, AWS, DigitalOcean).
     - [ ] Set up deployment configurations and environment variables.
+    - [ ] Set up docker-compose for client, api, workers, & db
     - [ ] Deploy the application and ensure it's accessible and functional.
 
 11. **Monitoring and Maintenance**
