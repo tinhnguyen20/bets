@@ -1,13 +1,14 @@
 from django.urls import path
 from .views import (
     BetCreateView,
-    BetListCreateView, BetRetrieveUpdateDestroyView,
+    BetListView, BetRetrieveUpdateDestroyView,
     BetOptionListCreateView, BetOptionRetrieveUpdateDestroyView,
     BetParticipantListCreateView, BetParticipantRetrieveUpdateDestroyView
 )
 
+from rest_framework.authtoken import views
 urlpatterns = [
-    path('bets/', BetListCreateView.as_view(), name='bet-list-create'),
+    path('bets/', BetListView.as_view(), name='bet-list-create'),
     path('bets/create/', BetCreateView.as_view(), name='bet-create'),
     path('bets/<int:pk>/', BetRetrieveUpdateDestroyView.as_view(), name='bet-detail'),
 
@@ -16,4 +17,6 @@ urlpatterns = [
 
     path('participants/', BetParticipantListCreateView.as_view(), name='participant-list-create'),
     path('participants/<int:pk>/', BetParticipantRetrieveUpdateDestroyView.as_view(), name='participant-detail'),
+
+    path('api-token-auth/', views.obtain_auth_token),
 ]

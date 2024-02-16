@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'core',
 ]
 
@@ -138,6 +139,8 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
@@ -152,18 +155,29 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Load Auth0 application settings into memory
-AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
-AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
-AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
+AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN", "")
+AUTH0_AUDIENCE = os.environ.get("AUTH0_AUDIENCE", "")
+AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID", "")
+AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET", "")
 
 # [TODO] JWT not supported in auth0 basic tier...
-JWT_AUTH = {
-    'JWT_PAYLOAD_GET_USERNAME_HANDLER':
-        'auth0authorization.utils.jwt_get_username_from_payload_handler',
-    'JWT_DECODE_HANDLER':
-        'auth0authorization.utils.jwt_decode_token',
-    'JWT_ALGORITHM': 'RS256',
-    'JWT_AUDIENCE': 'bets',
-    'JWT_ISSUER': 'https://dev-wlelmdzz.us.auth0.com/',
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+# JWT_AUTH = {
+#     'JWT_PAYLOAD_GET_USERNAME_HANDLER':
+#         'auth0authorization.utils.jwt_get_username_from_payload_handler',
+#     'JWT_DECODE_HANDLER':
+#         'auth0authorization.utils.jwt_decode_token',
+#     'JWT_ALGORITHM': 'RS256',
+#     'JWT_AUDIENCE': 'bets',
+#     'JWT_ISSUER': 'https://dev-wlelmdzz.us.auth0.com/',
+#     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+# }
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'RS256',
+    'AUDIENCE': AUTH0_AUDIENCE,
+    'ISSUER': f"https://{AUTH0_DOMAIN}/",
+    'JWK_URL': f"https://{AUTH0_DOMAIN}/.well-known/jwks.json",
+    "USER_ID_CLAIM": f"{AUTH0_AUDIENCE}/email",
+    'JTI_CLAIM': None,
+    'TOKEN_TYPE_CLAIM': None,
 }
