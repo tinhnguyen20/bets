@@ -25,9 +25,9 @@ python manage.py test
 
 ## Auth
 
-Access Token
+API requires Token Authentication, or an ongoing Django Admin session.
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"username": "<YOUR-USERNAME>", "password": "<YOUR-PASSWORD>"}' http://localhost:8000/api/token/
+curl -X POST -H "Content-Type: application/json" -d '{"username": "<YOUR-USERNAME>", "password": "<YOUR-PASSWORD>"}' http://localhost:8000/api-token-auth/
 ```
 
 ## TODO
